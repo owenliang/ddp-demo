@@ -7,7 +7,6 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
-import torch.multiprocessing as mp
 import os
 
 class Net(nn.Module):   # 模型定义
