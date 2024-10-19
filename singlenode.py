@@ -20,7 +20,6 @@ class Net(nn.Module):   # 模型定义
             nn.ReLU(),
             nn.Linear(64,10)
         )
-        self.buf=self.register_buffer('buf',torch.zeros(1))
     
     def forward(self,x):
         x=self.flatten(x)
