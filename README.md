@@ -6,16 +6,16 @@ Pytorch DDP 分布式训练示例.
 
 # 运行
 
-代码是CPU版本，任意机器均可运行.
-
 pytorch不要安装>=2.4，建议选择2.3版本，高版本底层有点变化还不稳定.
 
+**下面运行cpu版本**
+
 ```
-torchrun --nproc-per-node 8 singlenode.py
+torchrun --nproc-per-node 8 singlenode_cpu.py
 ```
 
-**主机负载**
-![图片](singlenode.png)
+**CPU负载**
+![图片](singlenode_cpu.png)
 
 **训练输出**
 ```
@@ -40,6 +40,42 @@ train_loss:0.005597482435405254 val_loss:0.09280980454863624
 train_loss:0.024241376668214798 val_loss:0.08535158351878636
 train_loss:0.003442130982875824 val_loss:0.08844634933894775
 ```
+
+**下面运行gpu版本**
+
+```
+torchrun --nproc-per-node 2 singlenode_gpu.py
+```
+
+**GPU负载**
+
+![图片](singlenode_gpu.png)
+
+**训练输出**
+
+```
+train_loss:0.08585123717784882 val_loss:0.15821034498453235
+train_loss:0.04274160414934158 val_loss:0.11166235524863481
+train_loss:0.019771497696638107 val_loss:0.09422017955414641
+train_loss:0.09019044786691666 val_loss:0.09446129071029326
+train_loss:0.09621671587228775 val_loss:0.07959854137078047
+train_loss:0.04162154719233513 val_loss:0.07437744689956545
+train_loss:0.07522722333669662 val_loss:0.08188239059542282
+train_loss:0.002014747355133295 val_loss:0.07646776500106685
+train_loss:0.0018418291583657265 val_loss:0.07617293855980334
+train_loss:0.006784400437027216 val_loss:0.08290687653703054
+train_loss:0.04486997053027153 val_loss:0.08682108365375692
+train_loss:0.0017010598676279187 val_loss:0.10362097959156605
+train_loss:0.0018368593882769346 val_loss:0.09146277327323542
+train_loss:0.007668677251785994 val_loss:0.09393906897135681
+train_loss:4.151080793235451e-05 val_loss:0.09868318892170293
+train_loss:0.0008594690007157624 val_loss:0.10407997771724219
+train_loss:0.00463233795017004 val_loss:0.09610629375036663
+train_loss:2.2827329303254373e-05 val_loss:0.09919017490187726
+train_loss:0.02090940810739994 val_loss:0.10843215247780008
+train_loss:0.0014010221930220723 val_loss:0.11312693469343373
+```
+
 
 # 参考资料
 

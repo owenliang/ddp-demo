@@ -20,7 +20,7 @@ class Net(nn.Module):   # 模型定义
             nn.ReLU(),
             nn.Linear(64,10)
         )
-    
+
     def forward(self,x):
         x=self.flatten(x)
         return self.seq(x)
@@ -42,8 +42,9 @@ def main():
         model.load_state_dict(checkpoint['model'])
 
     model=DDP(model) # 【集合通讯】rank0广播参数给其他进程
+    
     optimizer=torch.optim.Adam(model.parameters(),lr=0.001) #model参数一致，则optim会保证其初始状态一致
-    if checkpoint: 
+    if checkpoint:
         optimizer.load_state_dict(checkpoint['optimizer'])  # 各自加载checkpoint
 
     train_dataset=MNIST(root='./data',download=True,transform=ToTensor(),train=True) # 各自加载dataset
@@ -66,7 +67,7 @@ def main():
         
         dist.reduce(loss,dst=0) # 【集合通讯】rank0汇总其他进程的loss
         
-        if rank==0: 
+        if rank==0:
             train_avg_loss=loss.item()/world_size
             
             # evaluate
@@ -86,6 +87,6 @@ def main():
         
         dist.barrier() # 【集合通讯】等待rank0跑完eval
         
-# torchrun --nproc-per-node 8 singlenode.py
+# torchrun --nproc-per-node 8 singlenode_cpu.py
 if __name__=='__main__':
     main()
